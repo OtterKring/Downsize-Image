@@ -24,3 +24,18 @@ If an `OutputFile` is provided, the output will default to the file and not byte
 
 `TargetFileSize` defaults to 100.000 (bytes) to match the recommended size for Active Directory thumbnailPhotos
 `jpegQuality` defaults to 90, which cuts the filesize a lot compared to 100 but hardly compromises any quality.
+
+## History
+
+### 2020-08-31
+
+* added jpegQuality setting
+
+### 2020-08-28
+
+* added processing from memory streams to support full in-memory processing
+
+### end of 2019
+
+* Intial version
+* image files required for in- and output
