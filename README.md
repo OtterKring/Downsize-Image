@@ -16,8 +16,11 @@ So I came up with the idea of implementing a function in the import script which
 
 ## Syntax
 
-`Downsize-Image [-InputFile [string]] [-OutputFile [string]] [-ImageBytes [byte[]]] -[TargetFileSize [int32]]`
+`Downsize-Image [-InputFile [string]] [-OutputFile [string]] [-ImageBytes [byte[]]] -[TargetFileSize [int32]] -[jpegQuality (1-100)]`
 
 While all paramters are setup "optional" the function will require either an `InputFile` or `ImageBytes` to run, but not both (-> terminating error).
 
 If an `OutputFile` is provided, the output will default to the file and not byte array is returned. Is `OutputFile` is not used, the image will be returned as a byte array, as e.g. it is needed to upload the image to the Active Directory thumbnailPhoto attribute.
+
+`TargetFileSize` defaults to 100.000 to match the recommended size for Active Directory thumbnailPhotos
+`jpegQuality` defaults to 90, which cuts the filesize a lot compared to 100 but hardly compromises any quality.
