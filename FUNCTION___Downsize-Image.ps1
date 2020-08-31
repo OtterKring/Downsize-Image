@@ -20,6 +20,12 @@ Desired size of the resulting image in bytes
 
 DEFAULT = 100000
 
+.PARAMETER jpegQuality
+Desired quality of jpeg compression
+
+RANGE   = 0 - 100
+DEFAULT = 90
+
 .EXAMPLE
 # downsize pic.jpg to a maximum filesize of 1mb
 Downsize-Image -InputFile 'C:\Images\pic.jpg' -OutputFile 'C:\Images\pic2.jpg' -TargetFileSizeInBytes ([math]::pow(1024,2))
@@ -40,7 +46,9 @@ function Downsize-Image
         [string]$OutputFile,  # full path required!!!
         [byte[]]$ImageBytes,
         [Alias('PixelCount')]
-        [int32]$TargetFileSizeInByte = 100000
+        [int32]$TargetFileSizeInByte = 100000,
+        [ValidateRange(0,100)]
+        [int64]$jpegQuality = 90
     )
 
     function Get-ImageCodecInfo ($Image) {
@@ -128,9 +136,6 @@ function Downsize-Image
         # extract matching file extension from codec info
         $ImageFileExtension = Get-ImageCodecFilenameExtension $ImageCodecInfo
 
-        # desired jpeg quality
-        $jpegQuality = [int64]90
-        
         # create encoder from QualityGuid
         $QualityGuid = [System.Drawing.Imaging.Encoder]::Quality.Guid
         $Encoder = [System.Drawing.Imaging.Encoder]::new($QualityGuid)
